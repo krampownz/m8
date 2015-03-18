@@ -1,0 +1,48 @@
+<html>
+<head>
+	<title>Professor Creat</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+</head>
+<body>
+
+<?php
+	
+	include('professor_class.php');
+	
+	$fp = fopen("profes.txt","r");
+	$file_name = "profes.txt";
+	$contenido= array();
+	$contenido= fread($fp, filesize($file_name));
+	
+	if (!$contenido) {
+		
+		$contenido= array();
+		$professor= new Professor($_POST['nom'],$_POST['cognom'],$_POST['nif'],$_POST['correu']);
+		array_push($contenido, $professor);
+		$fp=fclose($fp);
+		$fp = fopen("profes.txt","w+");
+		$contenido= serialize($contenido);
+		fwrite($fp, $contenido);	
+		$fp=fclose($fp);
+		echo("Usuari creat correctament. Redireccionant al menú principal.");
+			
+	}
+	
+	else {
+		
+		$contenido= unserialize($contenido);
+		$fp=fclose($fp);	
+		$fp = fopen("profes.txt","w+");		
+		$professor= new Professor($_POST['nom'],$_POST['cognom'],$_POST['nif'],$_POST['correu']);	
+		array_push($contenido, $professor);
+		$contenido= serialize($contenido);
+		fwrite($fp, $contenido);	
+		$fp=fclose($fp);
+		echo("Usuari creat correctament. Redireccionant al menú principal.");
+	}
+	
+	header("refresh:5; url=index.html");
+		
+	?>
+</body>
+</html>

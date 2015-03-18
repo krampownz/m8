@@ -1,0 +1,75 @@
+<?php
+		
+	class Aula{
+
+		private $status = 1;
+                /**
+                 * @var String $nom variable que garda el nom
+                 * @param String $nom per a guardar el nom 
+                 */
+		private $numero;
+		private $capacitat;
+		private $ocupacio=0;
+		private $ordinadors;
+		private $alumnes = array();
+		private $professors = array();
+		
+                /**
+                 * 
+                 * @param type $n fa referencia al nom 
+                 * @param type $c 
+                 * @param type $o
+                 */
+		public function Aula($n, $c, $o){ 
+			$this->numero=$n;
+			$this->capacitat=$c;
+			$this->ordinadors=$o;
+		}
+		
+		public function getNumero() {
+			return $this->numero;
+		}
+						
+		/*public function toString(){
+			return $this->identificador.';'.$this->pis.';'.$this->numero.';'.$this->capacitat.';'.$this->ordinadors;	
+		}*/
+		
+		public function resetAlumnes(){
+			unset($this->alumnes);
+			$this->alumnes = array($this->capacitat);
+		}
+		
+		public function resetProfessors(){
+			unset($this->professors);
+			$this->professors = array();
+		}
+		
+		public function afegirAlumne($dni){
+			array_push($this->alumnes, $dni);
+		}
+		
+		public function afegirProfessor($dni){
+			array_push($this->professors, $dni);
+		}
+		
+		public function getCapacitat() {
+			return (int)$this->capacitat;
+		}
+		
+		public function getOcupacio() {
+			return $this->ocupacio;
+		}
+		
+		public function setOcupacio() {
+			
+			$this-> ocupacio++;
+		}
+		
+		public function getAlumnes() {
+			
+			return $this->alumnes;
+		}
+		
+	}			
+?>
+
